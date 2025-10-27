@@ -1,7 +1,17 @@
 import { useState } from "react";
 import { login, register } from "../api/userApi";
+import { sendHello } from "../api/wsApi";
 
 
+function redirectToRiddlePage(): void {
+    if (typeof window === "undefined") return;
+    // Client-side navigation to the riddle page (replace so back button doesn't return to login)
+    window.location.replace("/riddle");
+} 
+export function logout() {
+    localStorage.removeItem("name");
+    window.location.replace("/");
+  }
 export default function LoginPage() {
   const [loginUsername, setloginUsername] = useState("");
   const [registerUsername, setregisterUsername] = useState("");
@@ -16,11 +26,16 @@ export default function LoginPage() {
     try {
       const user = await login(loginUsername, loginPassword);
       console.log("Logged in user:", user);
+      localStorage.setItem("name", loginUsername);
+      redirectToRiddlePage();
+      sendHello(loginUsername);
       // Här kan du spara användaren i context eller state
     } catch (err) {
       setError("Login failed");
     }
   };
+
+ 
 
 const handleRegister = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -30,6 +45,7 @@ const handleRegister = async (event: React.FormEvent) => {
       const user = await register(registerUsername, registerPassword);
       console.log("Logged in user:", user);
       // Här kan du spara användaren i context eller state
+
     } catch (err) {
       setError("Login failed");
     }
@@ -79,3 +95,4 @@ const handleRegister = async (event: React.FormEvent) => {
     </>
   );
 }
+
