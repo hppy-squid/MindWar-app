@@ -12,10 +12,16 @@ export interface ChatMessage {
   chat: string;
 }
 
+export interface Riddle {
+  id: number;
+  riddle: string;
+}
+
 // ✅ Anslut till backend och returnera klienten
 export function connectWebSocket(
   onGreeting: (msg: GreetingMessage) => void,
   onChat: (msg: ChatMessage) => void,
+  onRiddle?: (riddle: Riddle | any) => void,
   onConnected?: () => void
 ) {
   const socket = new SockJS("http://localhost:8080/websocket");
@@ -38,10 +44,21 @@ export function connectWebSocket(
       onChat(data);
     });
 
+     client.subscribe("/topic/riddle", (message: IMessage) => {
+      const data = JSON.parse(message.body);
+      console.log("🧩 New riddle message:", data);
+      if (onRiddle) onRiddle(data);
+    });
+
     if (onConnected) onConnected();
   });
 
   return client;
+}
+
+export function requestNextRiddle() {
+  if (!stompClient || !stompClient.connected) return;
+  stompClient.send("/app/riddle/next", {}, JSON.stringify({}));
 }
 
 export function disconnectWebSocket() {
