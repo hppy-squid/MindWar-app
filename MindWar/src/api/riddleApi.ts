@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'mind-wars-production-28ae.up.railway.app/api';
 
 export async function fetchRiddles() {
     try {

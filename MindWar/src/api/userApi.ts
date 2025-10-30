@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const BASE_URL = 'mind-wars-production-28ae.up.railway.app/api';
+
 export async function login(username: string, password: string) {
   try {
-    const response = await axios.post("http://localhost:8080/api/users/login", {
+    const response = await axios.post(`${BASE_URL}/users/login`, {
       username,
       password,
     });
@@ -16,7 +18,7 @@ export async function login(username: string, password: string) {
 
 export async function register(username: string, password: string) {
   try {
-    const response = await axios.post('http://localhost:8080/api/users/createUser',
+    const response = await axios.post(`${BASE_URL}/users/createUser`,
         { username, password, }
     );
     console.log(response);

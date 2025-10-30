@@ -4,6 +4,8 @@ import type { IMessage, Frame } from "@stomp/stompjs";
 
 let stompClient: CompatClient | null = null;
 
+const BASE_URL = 'mind-wars-production-28ae.up.railway.app';
+
 export interface GreetingMessage {
   content: string;
 }
@@ -24,7 +26,7 @@ export function connectWebSocket(
   onRiddle?: (riddle: Riddle | any) => void,
   onConnected?: () => void
 ) {
-  const socket = new SockJS("http://localhost:8080/websocket");
+  const socket = new SockJS(`${BASE_URL}/websocket`);
   const client = Stomp.over(socket);
 
   // Tyst debug-loggning

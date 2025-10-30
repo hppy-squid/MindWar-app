@@ -2,8 +2,8 @@ import {  useEffect, useState } from "react";
 
 import { logout } from "./login";
 import { useWebSocket } from "../wsGlobal";
-import { fetchRiddles, sendGuess } from "../api/riddleApi";
-import { requestNextRiddle, sendChat } from "../api/wsApi";
+import {  sendGuess } from "../api/riddleApi";
+
 
 export default function RiddlePage() {
   const { sendChat, messages, riddle, requestNextRiddle } = useWebSocket();
@@ -12,7 +12,7 @@ export default function RiddlePage() {
 
   const [guess, setGuess] = useState("");
   const [result, setResult] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
 useEffect(() => {
   // begär första gåtan när sidan laddas
