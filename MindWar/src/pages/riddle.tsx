@@ -15,6 +15,8 @@ export default function RiddlePage() {
   const [loading] = useState(false);
 
 useEffect(() => {
+   setGuess("");
+  setResult(null);
   requestNextRiddle();
 }, []);
 
