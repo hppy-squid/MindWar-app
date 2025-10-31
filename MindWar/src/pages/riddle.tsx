@@ -15,9 +15,19 @@ export default function RiddlePage() {
   const [loading] = useState(false);
 
 useEffect(() => {
-  // begär första gåtan när sidan laddas
   requestNextRiddle();
 }, []);
+
+
+
+ const nextRiddle = () => {
+  setGuess("");
+  setResult(null);
+  requestNextRiddle();
+};
+
+
+
 
   const handleGuess = async () => {
     if (!riddle) return;
@@ -33,6 +43,7 @@ useEffect(() => {
       } else {
         sendChat("System", `${name} fel gissning`);
       }
+      setGuess("");
     } catch (error) {
       console.error("Error sending guess:", error);
     }
@@ -49,7 +60,7 @@ useEffect(() => {
   return (
     <div style={{ padding: "2rem" }}>
       <button onClick={logout}>Logga ut</button>
-      <h1>💭 Mind War Chat</h1>
+      <h1>💭 Mind War </h1>
 
       {/* 🧩 GÅTAN */}
       <div
@@ -90,7 +101,7 @@ useEffect(() => {
             )}
 
             <button
-              onClick={requestNextRiddle}
+              onClick={nextRiddle}
               style={{ marginTop: "0.5rem", backgroundColor: "#dddddd5d" }}
             >
               🔁 Nästa gåta

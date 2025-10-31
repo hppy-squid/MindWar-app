@@ -19,7 +19,7 @@ export interface Riddle {
   riddle: string;
 }
 
-// ✅ Anslut till backend och returnera klienten
+
 export function connectWebSocket(
   onGreeting: (msg: GreetingMessage) => void,
   onChat: (msg: ChatMessage) => void,
@@ -28,8 +28,7 @@ export function connectWebSocket(
 ) {
   const socket = new SockJS(`${BASE_URL}/websocket`);
   const client = Stomp.over(socket);
-
-  // Tyst debug-loggning
+  
   client.debug = () => {};
 
   client.connect({}, (frame: Frame) => {
