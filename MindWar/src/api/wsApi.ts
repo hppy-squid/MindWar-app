@@ -4,7 +4,7 @@ import type { IMessage, Frame } from "@stomp/stompjs";
 
 let stompClient: CompatClient | null = null;
 
-const BASE_URL = 'mind-wars-production-28ae.up.railway.app';
+const BASE_URL = 'https://mind-wars-production-28ae.up.railway.app';
 
 export interface GreetingMessage {
   content: string;
