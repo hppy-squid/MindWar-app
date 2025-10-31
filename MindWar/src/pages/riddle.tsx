@@ -108,7 +108,12 @@ useEffect(() => {
             </button>
           </>
         ) : (
-          <p>Ingen gåta tillgänglig</p>
+          <button
+              onClick={nextRiddle}
+              style={{ marginTop: "0.5rem", backgroundColor: "#dddddd5d" }}
+            >
+              🔁 Hämta gåta
+            </button>
         )}
       </div>
 
